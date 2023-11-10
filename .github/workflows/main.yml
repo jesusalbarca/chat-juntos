@@ -1,0 +1,39 @@
+name: Despliegue en Servidor
+
+on:
+  push:
+    branches:
+      - main  # o el nombre de tu rama principal
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout del código fuente
+      uses: actions/checkout@v2
+
+    - name: Configuración de Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 14  # Puedes ajustar esto según la versión que necesites
+
+    - name: Instalación de dependencias
+      run: |
+        npm install
+        cd client  # O el nombre de tu carpeta de cliente si es diferente
+        npm install
+        cd ..
+
+    - name: Construcción de la aplicación
+      run: |
+        npm run build
+        cd client  # O el nombre de tu carpeta de cliente si es diferente
+        npm run build
+        cd ..
+
+    - name: Despliegue en el servidor
+      run: scp -r ./ user@tu-servidor:/ruta/del/despliegue
+
+    - name: Reinicio del servidor
+      run: ssh user@tu-servidor "pm2 restart chat juntos"
