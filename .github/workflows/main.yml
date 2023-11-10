@@ -20,12 +20,12 @@ jobs:
 
     - name: Instalación de dependencias del servidor
       run: npm install
-
+      
     - name: Instalación de dependencias del cliente
       run: npm install --prefix client
 
     - name: Construcción del cliente
-      run: npm --prefix client install && npm --prefix client run build
+      run: npm run build --prefix client
 
     - name: Despliegue en el servidor
       run: scp -r ./ user@tu-servidor:/ruta/del/despliegue
