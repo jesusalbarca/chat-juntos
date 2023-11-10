@@ -18,12 +18,11 @@ jobs:
       with:
         node-version: 14  # Puedes ajustar esto según la versión que necesites
 
-    - name: Instalación de dependencias
-      run: |
-        npm install
-        cd client  # O el nombre de tu carpeta de cliente si es diferente
-        npm install
-        cd ..
+    - name: Instalación de dependencias del servidor
+      run: npm install
+
+    - name: Instalación de dependencias del cliente
+      run: npm install --prefix client
 
     - name: Construcción de la aplicación
       run: |
@@ -36,4 +35,4 @@ jobs:
       run: scp -r ./ user@tu-servidor:/ruta/del/despliegue
 
     - name: Reinicio del servidor
-      run: ssh user@tu-servidor "pm2 restart chat juntos"
+      run: ssh user@tu-servidor "pm2 restart nombre-de-tu-app"
