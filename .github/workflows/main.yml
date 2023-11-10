@@ -30,9 +30,3 @@ jobs:
         cd client  # O el nombre de tu carpeta de cliente si es diferente
         npm run build
         cd ..
-
-    - name: Despliegue en el servidor
-      run: scp -r ./ user@tu-servidor:/ruta/del/despliegue
-
-    - name: Reinicio del servidor
-      run: ssh user@tu-servidor "pm2 restart nombre-de-tu-app"
