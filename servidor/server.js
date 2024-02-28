@@ -26,9 +26,9 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 console.log(__dirname)
 const server = http.createServer(app)
 const io = new SocketServer(server, {
-   // cors:{
-    //    origin: 'http://localhost:3000'
-   // }
+    cors:{
+        origin: '*'
+    }
 })
 
 app.get('/hola', (req, res) => {
